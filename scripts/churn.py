@@ -26,7 +26,11 @@ def parse_args():
     parser.add_argument("-H", "--hostname",
             type=str,
             required=True,
-            help="name of system, reads <server_name.env>") 
+            help="the system hostname")
+    parser.add_argument("-R", "--realm",
+            type=str,
+            required=True,
+            help="the rest of the hosts FQDN") 
     parser.add_argument("-k","--kvm_host",
             type=str,
             required=True,
@@ -122,7 +126,7 @@ def cobblerize(arg):
         genmac0 = mac_generator()
 
 #set FQDN, turn the hostname into an FQND
-    fqdn = args.hostname + ".int.pokkari.net"
+    fqdn = args.hostname + . + realm
 
 #setup your cobbler session wth the cobbler server
     cobbler_server_api = 'http://' + args.cobbler_server + '/cobbler_api'
@@ -157,7 +161,7 @@ def cobblerize_dual(arg):
         genmac1 = mac_generator()
 
 #set FQDN, turn the hostname into an FQND
-    fqdn = args.hostname + ".int.pokkari.net"
+    fqdn = args.hostname + . + realm
 
 #setup your cobbler session wth the cobbler server
     cobbler_server_api = 'http://' + args.cobbler_server + '/cobbler_api'
